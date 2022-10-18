@@ -5,7 +5,7 @@ PLUGIN_ARCH ?= amd64
 
 plugin_sqlite: bin/$(PLUGIN_OS)$(PLUGIN_ARCH)/sqlite.so
 
-bin/$(PLUGIN_OS)$(PLUGIN_ARCH)/sqlite.so: ../../glauth-sqlite/sqlite.go
+bin/$(PLUGIN_OS)$(PLUGIN_ARCH)/sqlite.so: pkg/plugins/glauth-sqlite/sqlite.go
 	GOOS=$(PLUGIN_OS) GOARCH=$(PLUGIN_ARCH) go build ${TRIM_FLAGS} -ldflags "${BUILD_VARS}" -buildmode=plugin -o $@ $^
 
 plugin_sqlite_linux_amd64:
