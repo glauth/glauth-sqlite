@@ -19,3 +19,6 @@ plugin_sqlite_darwin_amd64:
 
 plugin_sqlite_darwin_arm64:
 	PLUGIN_OS=darwin PLUGIN_ARCH=arm64 make plugin_sqlite
+
+release-glauth-sqlite:
+	@P=sqlite M=pkg/plugins/glauth-sqlite make releaseplugin
