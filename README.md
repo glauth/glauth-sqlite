@@ -53,7 +53,7 @@ INSERT INTO includegroups(parentgroupid, includegroupid) VALUES(5504, 5502);
 INSERT INTO includegroups(parentgroupid, includegroupid) VALUES(5504, 5501);
 INSERT INTO users(name, uidnumber, primarygroup, passsha256) VALUES('hackers', 5001, 5501, '6478579e37aff45f013e14eeb30b3cc56c72ccdc310123bcdf53e0333e3f416a');
 INSERT INTO users(name, uidnumber, primarygroup, passsha256) VALUES('johndoe', 5002, 5502, '6478579e37aff45f013e14eeb30b3cc56c72ccdc310123bcdf53e0333e3f416a');
-INSERT INTO users(name, mail, uidnumber, primarygroup, passsha256) VALUES('serviceuser', "serviceuser@example.com", 5003, 5502, '652c7dc687d98c9889304ed2e408c74b611e86a40caa51c4b43f1dd5913c5cd0');
+INSERT INTO users(name, mail, uidnumber, primarygroup, passsha256) VALUES('serviceuser', 'serviceuser@example.com', 5003, 5502, '652c7dc687d98c9889304ed2e408c74b611e86a40caa51c4b43f1dd5913c5cd0');
 INSERT INTO users(name, uidnumber, primarygroup, passsha256, othergroups, custattr) VALUES('user4', 5004, 5504, '652c7dc687d98c9889304ed2e408c74b611e86a40caa51c4b43f1dd5913c5cd0', '5505,5506', '{"employeetype":["Intern","Temp"],"employeenumber":[12345,54321]}');
 INSERT INTO capabilities(userid, action, object) VALUES(5001, "search", "ou=superheros,dc=glauth,dc=com");
 INSERT INTO capabilities(userid, action, object) VALUES(5003, "search", "*");
@@ -158,27 +158,3 @@ Alternatively, in Postgres and MySQL, we could rely on the database engine's bui
 **So, what's the decision?**
 
 In GLAuth 2.x, when including information that does not benefit from being normalized (e.g. custom attributes) we are following the "nosql" trend (irony!) of storing this data in a JSON structure.
-
-## PAM Plugin
-
-To authenticate against local users, edit the configuration file (see pkg/plugins/sample-pam.cfg) so that:
-
-```
-...
-[backend]
-  datastore = "plugin"
-  plugin = "bin/pam.so"
-...
-```
-
-When building this plugin, one must first ensure that the proper development headers are installed. For instance, on Ubuntu:
-```
-sudo apt-get install libpam0g-dev
-```
-
-You will likely also wish to tweak the `groupWithSearchCapability` setting, to assign an appropriate secondary group.
-
-Then, to perform a search:
-```
-ldapsearch -LLL -H ldap://localhost:3893 -D cn=<unix user name>,ou=<a group the user belongs to>,dc=glauth,dc=com -w <unix user password> -x -bdc=glauth,dc=com  cn=<unix user name>
-```
