@@ -35,19 +35,19 @@ so, let's say you built the 'sqlite' plugin, you would now specify its library: 
 ### SQLite, MySQL, Postgres
 
 Tables:
-- users, groups are self-explanatory
+- users, ldapgroups are self-explanatory
 - includegroups store the 'includegroups' relationships
 - othergroups, on the other hand, are a comma-separated list found in the users table (performance)
 
 Here is how to insert example data using your database's REPL (more detailed information can be found in pkg/plugins/sample-database.cfg)
 
 ```sql
-INSERT INTO groups(name, gidnumber) VALUES('superheros', 5501);
-INSERT INTO groups(name, gidnumber) VALUES('svcaccts', 5502);
-INSERT INTO groups(name, gidnumber) VALUES('civilians', 5503);
-INSERT INTO groups(name, gidnumber) VALUES('caped', 5504);
-INSERT INTO groups(name, gidnumber) VALUES('lovesailing', 5505);
-INSERT INTO groups(name, gidnumber) VALUES('smoker', 5506);
+INSERT INTO ldapgroups(name, gidnumber) VALUES('superheros', 5501);
+INSERT INTO ldapgroups(name, gidnumber) VALUES('svcaccts', 5502);
+INSERT INTO ldapgroups(name, gidnumber) VALUES('civilians', 5503);
+INSERT INTO ldapgroups(name, gidnumber) VALUES('caped', 5504);
+INSERT INTO ldapgroups(name, gidnumber) VALUES('lovesailing', 5505);
+INSERT INTO ldapgroups(name, gidnumber) VALUES('smoker', 5506);
 INSERT INTO includegroups(parentgroupid, includegroupid) VALUES(5503, 5501);
 INSERT INTO includegroups(parentgroupid, includegroupid) VALUES(5504, 5502);
 INSERT INTO includegroups(parentgroupid, includegroupid) VALUES(5504, 5501);
