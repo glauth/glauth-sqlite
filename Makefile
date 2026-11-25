@@ -14,6 +14,9 @@ plugin_sqlite_linux_amd64:
 plugin_sqlite_linux_arm64:
 	PLUGIN_OS=linux PLUGIN_ARCH=arm64 make plugin_sqlite
 
+plugin_sqlite_linux_ppc64le:
+	PLUGIN_OS=linux PLUGIN_ARCH=ppc64le make plugin_sqlite
+
 plugin_sqlite_darwin_amd64:
 	PLUGIN_OS=darwin PLUGIN_ARCH=amd64 make plugin_sqlite
 
